@@ -157,7 +157,7 @@ function App() {
   const getDatesArray = (exercises) => {
     return exercises.reduce((result, currentItem) => {
 
-      const createdAt = getDate(currentItem['created']);
+      const createdAt = getDate(new Date(currentItem['created']));
       // see if currentItem belongs to an existing date in the array already
       const index = getDateIndex(result, createdAt);
       // if not, add the date to the array
@@ -183,7 +183,8 @@ function App() {
     let populatedSession = sessions;
 
     exercises.forEach(exercise => {
-      let createdAt = getDate(exercise['created']);
+      let createdAt = getDate(new Date(exercise.created));
+      console.log('createdAt', createdAt);
 
       const index = getDateIndex(populatedSession, createdAt);
 
@@ -213,7 +214,7 @@ function App() {
     setCurrentExercise(newExercise);
 
     // get vars for exercise placement in sessions
-    const createdAt = getDate(newExercise.created);
+    const createdAt = getDate(new Date(newExercise.created));
     const index = getDateIndex(sessions, createdAt);
 
     console.log('index', index)
@@ -264,36 +265,57 @@ function App() {
     }
   }
 
-  const downloadJson = (fileName, contentType) => {
-    var a = document.createElement("a");
-    const content = JSON.stringify(sessions);
+  const downloadJson = async (fileName, contentType) => {
+    const dbItems = await localForage.getItems();
+    const exercisesArray = Object.values(dbItems);
+
+    let a = document.createElement("a");
+    const content = JSON.stringify(exercisesArray, null, 2);
     console.log('content', content);
     var file = new Blob([content], {type: 'text/plain'});
     a.href = URL.createObjectURL(file);
-    a.download = 'session-json.json';
+
+    a.download = `sess-log-exercises-${exercisesArray.length}.json`;
     a.click();
   }
 
-  const openUploaded = () => {
+  const openUploader = () => {
     let uploadInput = document.getElementById('uploadJsonInput');
     uploadInput.click();
   }
 
-  const uploadJson = e => {
+  const uploadJson = async (e) => {
+    let promises =[];
 
-    const fileReader = new FileReader();
-    fileReader.readAsText(e.target.files[0], "UTF-8");
-    fileReader.onload = e => {
+    try {
+      const fileReader = new FileReader();
+      fileReader.readAsText(e.target.files[0], "UTF-8");
+      fileReader.onload = e => {
+        let exercises = JSON.parse(e.target.result);
 
-      let sessionData = JSON.parse(e.target.result);
+        exercises.forEach(async (exercise) => {
+          console.log('exercise', exercise);
+          promises.push(localForage.setItem(exercise.id.toString(), exercise));
+        });
+      };
+    } catch (error) {
+      console.log('error 1', error);
+      alert('There was an error uploading your file. Please try again.')
+    }
 
-      console.log("sessionData", sessionData);
-
-
-      setSessions(sessionData);
-
-      // setFiles(e.target.result);
-    };
+    try {
+        // clear db
+        await localForage.clear();
+        // populate w/ new data
+        await Promise.all(promises);
+        // load to state
+        let newSessions = await loadSessions();
+        await setSessions(newSessions);
+        console.log('')
+      } catch (error) {
+        console.log('error 2', error);
+        alert('There was an error processing your file. Please check its content.');
+      }
   };
 
   const circleBtnClass = `
@@ -308,9 +330,9 @@ function App() {
   `;
 
   return (
-    <div className="flex justify-center items-center w-100">
+    <div className="flex justify-center items-center sm:w-100 md:w-1/3 md:m-auto">
       <input id="uploadJsonInput" type="file" className="hidden" onChange={uploadJson}/>
-      <div className="relative flex flex-col">
+      <div className="relative flex-1 flex flex-col">
         <FadeIn isVisible={newExerciseMode} className="sticky top-0">
           <NewExercise
             addExercise={addExercise}
@@ -324,7 +346,7 @@ function App() {
           <button className={circleBtnClass} onClick={downloadJson}>
             <DownloadSvg className="w-xm h-xm stroke-white" />
           </button>
-          <button className={circleBtnClass} onClick={openUploaded}>
+          <button className={circleBtnClass} onClick={openUploader}>
             <UploadSvg className="w-xm h-xm stroke-white"  />
           </button>
           <QuickAddBtn closeMode={newExerciseMode} onClick={toggleNewExercise()} />
