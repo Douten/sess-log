@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 import localForage from 'localforage';
 import { extendPrototype } from 'localforage-getitems';
 import { useState, useEffect } from 'react'
@@ -14,6 +14,7 @@ import FadeIn from  './components/animations/FadeIn'
 // icons
 import { ReactComponent as DownloadSvg } from './images/icon/download.svg'
 import { ReactComponent as UploadSvg } from './images/icon/upload.svg'
+import pointerArrows from './images/btn-pointer-arrows.png'
 
 
 
@@ -329,20 +330,31 @@ function App() {
     mr-s
   `;
 
+  const emptyExercises = (
+    <div className="text-black-lite  flex-col flex flex-1 justify-center items-center">
+      <h2 className="text-emoji-l">🧘🏻‍♂️</h2>
+      <p className="mt-m">you have no exercises.</p>
+      <p >add or import below.</p>
+    </div>
+  );
+
   return (
     <div className="flex justify-center items-center sm:w-100 md:w-1/3 md:m-auto">
       <input id="uploadJsonInput" type="file" className="hidden" onChange={uploadJson}/>
-      <div className="relative flex-1 flex flex-col">
+      <div className="relative h-screen flex-1 flex flex-col">
         <FadeIn isVisible={newExerciseMode} className="sticky top-0">
           <NewExercise
             addExercise={addExercise}
             addReps={addReps}
           />
         </FadeIn>
-        <section>
-          <ExerciseTables sessions={sessions} />
+        <section className="flex-1 flex">
+          { sessions.length > 0 ? <ExerciseTables sessions={sessions} /> : emptyExercises }
         </section>
         <div className="sticky self-end mr-m bottom-m flex items-end">
+          <div className="absolute flex-1 w-fit btn-arrow-pointers">
+            <img className="w-7/10" src={pointerArrows} alt="Arrows pointing to action buttons" />
+          </div>
           <button className={circleBtnClass} onClick={downloadJson}>
             <DownloadSvg className="w-xm h-xm stroke-white" />
           </button>
