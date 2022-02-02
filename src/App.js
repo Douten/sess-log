@@ -330,11 +330,9 @@ function App() {
     mr-s
   `;
 
-  const emptyExercises = (
-    <div className="text-black-lite  flex-col flex flex-1 justify-center items-center">
-      <h2 className="text-emoji-l">🧘🏻‍♂️</h2>
-      <p className="mt-m">you have no exercises.</p>
-      <p >add or import below.</p>
+  const btnArrows = (
+    <div className="absolute flex-1 w-fit btn-arrow-pointers">
+      <img className="w-7/10" src={pointerArrows} alt="Arrows pointing to action buttons" />
     </div>
   );
 
@@ -348,18 +346,17 @@ function App() {
             addReps={addReps}
           />
         </FadeIn>
-        <section className="flex-1 flex">
-          { sessions.length > 0 ? <ExerciseTables sessions={sessions} /> : emptyExercises }
+
+        <section className="flex-1 flex flex-col">
+          <ExerciseTables sessions={sessions} />
         </section>
         <div className="sticky self-end mr-m bottom-m flex items-end">
-          <div className="absolute flex-1 w-fit btn-arrow-pointers">
-            <img className="w-7/10" src={pointerArrows} alt="Arrows pointing to action buttons" />
-          </div>
-          <button className={circleBtnClass} onClick={downloadJson}>
-            <DownloadSvg className="w-xm h-xm stroke-white" />
-          </button>
+          { sessions.length > 0 ? null : btnArrows }
           <button className={circleBtnClass} onClick={openUploader}>
             <UploadSvg className="w-xm h-xm stroke-white"  />
+          </button>
+          <button className={circleBtnClass} onClick={downloadJson}>
+            <DownloadSvg className="w-xm h-xm stroke-white" />
           </button>
           <QuickAddBtn closeMode={newExerciseMode} onClick={toggleNewExercise()} />
         </div>
