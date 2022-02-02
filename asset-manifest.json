@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/sess-log/static/css/main.c4769ff5.css",
-    "main.js": "/sess-log/static/js/main.8bd668f3.js",
+    "main.css": "/sess-log/static/css/main.cd0a2422.css",
+    "main.js": "/sess-log/static/js/main.0b926c2f.js",
     "static/js/787.947a0d94.chunk.js": "/sess-log/static/js/787.947a0d94.chunk.js",
     "static/media/work-sans.ttf": "/sess-log/static/media/work-sans.bb6e3e8193f32a7fc502.ttf",
     "static/media/btn-pointer-arrows.png": "/sess-log/static/media/btn-pointer-arrows.71de729c708afbe222a7.png",
@@ -10,12 +10,12 @@
     "static/media/upload.svg": "/sess-log/static/media/upload.7d7686954e6ce4e2ddd855370dc64d49.svg",
     "static/media/x.svg": "/sess-log/static/media/x.dbf85b52579c65c482281e217b483402.svg",
     "static/media/plus.svg": "/sess-log/static/media/plus.e9afcbe9b77b26bbd102cdef076bf653.svg",
-    "main.c4769ff5.css.map": "/sess-log/static/css/main.c4769ff5.css.map",
-    "main.8bd668f3.js.map": "/sess-log/static/js/main.8bd668f3.js.map",
+    "main.cd0a2422.css.map": "/sess-log/static/css/main.cd0a2422.css.map",
+    "main.0b926c2f.js.map": "/sess-log/static/js/main.0b926c2f.js.map",
     "787.947a0d94.chunk.js.map": "/sess-log/static/js/787.947a0d94.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4769ff5.css",
-    "static/js/main.8bd668f3.js"
+    "static/css/main.cd0a2422.css",
+    "static/js/main.0b926c2f.js"
   ]
 }
