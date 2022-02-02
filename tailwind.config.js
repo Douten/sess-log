@@ -17,6 +17,7 @@ module.exports = {
       'gray-3': '#ACB5BD',
       'gray-4': '#495057',
       'black': '#212429',
+      'black-lite': '#41454B',
       'white': '#FFFFFF',
       'fuschia-60': '#FCDDEC'
     },
@@ -33,14 +34,16 @@ module.exports = {
         'xl': '',
         'xxl': '',
         'btn': '32px',
-        '50': '50px'
+        '50': '50px',
+        '7/10': '70%'
       },
       fontSize:{
         'xs': '12px',
         's': '14px',
         'm': '16px',
         'l': '21px',
-        'xl': '26px'
+        'xl': '26px',
+        'emoji-l': '60px'
       },
       borderRadius: {
         '4xl': '2rem',
