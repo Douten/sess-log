@@ -19,9 +19,9 @@ const ExerciseTables = ({ sessions }) => {
   )
 
   return (
-    <>
+    <section className="flex-1 flex flex-col">
       { sessions.length ? <Tables /> : <EmptyState /> }
-    </>
+    </section>
   );
 }
 
