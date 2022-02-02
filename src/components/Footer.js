@@ -45,7 +45,6 @@ const Footer = ({ emptySessions, setNewExerciseMode, newExerciseMode, loadSessio
         let exercises = JSON.parse(e.target.result);
 
         exercises.forEach(async (exercise) => {
-          console.log('exercise', exercise);
           promises.push(localForage.setItem(exercise.id.toString(), exercise));
         });
       };

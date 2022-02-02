@@ -74,8 +74,6 @@ function App() {
 
     exercises.forEach(exercise => {
       let createdAt = getDate(new Date(exercise.created));
-      console.log('createdAt', createdAt);
-
       const index = getDateIndex(populatedSession, createdAt);
 
       if (index >= 0) {

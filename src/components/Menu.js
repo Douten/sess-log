@@ -70,7 +70,7 @@ const Menu = ({ newExerciseMode, sessions, setSessions, setCurrentExercise, curr
   }
 
   return (
-    <div className="sticky top-0 flex-1">
+    <div className="sticky top-0">
       <FadeIn isVisible={newExerciseMode}>
         <NewExercise
           addExercise={addExercise}
