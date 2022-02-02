@@ -11,7 +11,8 @@ const Menu = ({ newExerciseMode, sessions, setSessions, setCurrentExercise, curr
 
   // Actions
   const addExercise = async ({ exercise, reps, weight }) => {
-    const exerciseId = (sessions.length + 1);
+    const exerciseId = await localForage.length() + 1;
+
     // set up new exercise
     const newExercise = {
       id: exerciseId,
