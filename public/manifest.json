@@ -10,12 +10,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "images/bell-icon-256.png",
+      "src": "images/temp-logo/bell-icon-256.png",
       "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "images/bell-icon-512.png",
+      "src": "images/temp-logo/bell-icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
