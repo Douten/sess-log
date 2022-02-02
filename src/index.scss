@@ -19,6 +19,7 @@
 
   html {
     font-size: 14px;
+    @apply text-black
   }
 
   h2 {
@@ -42,5 +43,14 @@
 
   .stroke-white path {
     stroke: #fff
+  }
+
+  .btn-arrow-pointers {
+    bottom: 33px;
+    right: 8px;
+
+    img {
+      filter: invert(26%) sepia(89%) saturate(1641%) hue-rotate(358deg) brightness(104%) contrast(91%);
+    }
   }
 }
