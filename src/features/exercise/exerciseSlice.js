@@ -21,6 +21,11 @@ export const exerciseSlice = createSlice({
       let exercise = state.find((exercise) => exercise.id === id);
       exercise.sets.push({reps, weight, created});
     },
+    removeSet: (state, action) => {
+      const { id, setIndex } = action.payload;
+      let exercise = state.find((exercise) => exercise.id === id);
+      exercise.sets.splice(setIndex, 1);
+    },
     addExercise: (state, action) => {
       // state.value -= 1
       // state = [action.payload, ...state];
@@ -107,6 +112,20 @@ export const patchSet = ({ id, reps, weight }) => {
   }
 }
 
+export const deleteSet = ({ id, setIndex }) => {
+  return async (dispatch, getState) => {
+    try {
+      await dispatch(removeSet({ id, setIndex }));
+      const { exercise: exercises } = getState();
+      const exercise = exercises.find((exercise) => exercise.id === id);
+      await localForage.setItem(exercise.id.toString(), exercise);
+      return true;
+    } catch (err) {
+      console.log('patchSet err', err);
+    }
+  }
+}
+
 export const sessionByDate = (data) => {
   if (data?.exercise?.length) {
     const sessionsDate = getDatesArray(data.exercise)
@@ -160,6 +179,6 @@ const loadExercisesIntoDates = (sessions, exercises) => {
   return populatedSession;
 }
 
-export const { addSet, addExercise, editExercise } = exerciseSlice.actions
+export const { addSet, addExercise, editExercise, removeSet } = exerciseSlice.actions
 
 export default exerciseSlice.reducer

@@ -6,7 +6,7 @@ import { getSetTime } from '../utils/date';
 
 import { useDispatch } from 'react-redux';
 import {
-  patchExercise, patchSet
+  patchExercise, patchSet, deleteSet
 } from '../features/exercise/exerciseSlice'
 
 const EditView = ({ exercise, setView }) => {
@@ -58,6 +58,13 @@ const EditView = ({ exercise, setView }) => {
     dispatch(patchExercise({ id, prop, value}));
   }
 
+  const onDeleteSet = (setIndex) => (e) => {
+    const { id, value } = getProps(e);
+    const prop = `sets[${setIndex}].reps`
+
+    dispatch(deleteSet({ id, setIndex }));
+  }
+
   const onNameChange = (e) => {
     const { id, value } = getProps(e);
     const prop = 'name';
@@ -93,7 +100,10 @@ const EditView = ({ exercise, setView }) => {
             <div key={index} className="flex items-center mb-l">
               <Input onChange={onRepChange(index)} placeholder="reps" value={reps} className="w-50 mr-m" />
               <Input onChange={onWeightChange(index)} placeholder="weight" value={weight} className="w-50 flex-1 mr-m" />
-              <span>{created}</span>
+              <div className="mr-l">{created}</div>
+              <button onClick={onDeleteSet(index)} className="mr-m w-btn h-btn text-red text-center border border-red rounded opacity-75	">
+                X
+              </button>
             </div>
           );
         })}
@@ -101,7 +111,7 @@ const EditView = ({ exercise, setView }) => {
       <div className="flex">
         <Input onChange={(e) => { setNewReps(e.target.value) }} placeholder="reps" value={newReps} className="w-50 mr-m" />
         <Input onChange={(e) => { setNewWeight(e.target.value) }} placeholder="weight" value={newWeight} className="w-50 mr-m flex-1" />
-        <Button text="Add Set" onClick={() => addNewSet()} className="self-end"/>
+        <Button text="Add Set" onClick={() => addNewSet()} className="self-end" />
       </div>
       <div className="flex justify-between">
         <button onClick={() => setView('row')} className="self-end">
