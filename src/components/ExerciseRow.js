@@ -17,11 +17,33 @@ const ExerciseRow = ({ exercise }) => {
       return;
     }
 
-    if (newView === 'row' && !exercise.name) {
-      dispatch(patchExercise({ id: exercise.id, prop: 'name', value: 'New Exercise'}));
+    const id = exercise.id;
+
+    if (newView === 'row') {
+      if (!exercise.name) {
+        const prop = 'name';
+        const value = 'New Exercise';
+        dispatch(patchExercise({ id, prop, value}));
+      }
+
+      if (exercise.sets.length < 1) {
+        const prop = 'sets[0]';
+        const value = { reps: '1', weight: '', created: new Date().toJSON() };
+        dispatch(patchExercise({ id, prop, value}));
+      }
+
+      if (exercise.sets.find((set) => set.reps < 1)) {
+        exercise.sets.forEach((set, index) => {
+          if (set.reps < 1) {
+            const prop = `sets[${index}].reps`;
+            const value = '1';
+            dispatch(patchExercise({ id, prop, value}));
+          }
+        });
+      }
     }
 
-    dispatch(patchExercise({ id: exercise.id, prop: 'view', value: newView}));
+    dispatch(patchExercise({ id, prop: 'view', value: newView}));
   }
 
   return (

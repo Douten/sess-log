@@ -21,8 +21,7 @@ const EditView = ({ exercise, setView }) => {
 
   useEffect(() => {
     let interval = null;
-
-    if (isActive === false) {
+    if (isActive) {
       interval = setInterval(() => {
         setTime((time) => time + 10);
       }, 10);
@@ -71,10 +70,11 @@ const EditView = ({ exercise, setView }) => {
   }
 
   const addNewSet = () => {
-    const reps = newReps;
+    const reps = newReps < 1 ? 1 : newReps;
     const weight = newWeight;
     dispatch(patchSet({ id: exercise.id, reps, weight }));
     handleResetTimer();
+    handleStartTimer();
   }
 
   // complete this as separate component & RowView too
