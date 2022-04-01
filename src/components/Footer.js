@@ -1,4 +1,9 @@
 import localForage from 'localforage';
+import { useDispatch
+ } from 'react-redux';
+import {
+  postExercise
+} from '../features/exercise/exerciseSlice'
 
 // components
 import QuickAddBtn from './buttons/QuickAddBtn'
@@ -8,7 +13,8 @@ import pointerArrows from '../images/btn-pointer-arrows.png'
 import { ReactComponent as DownloadSvg } from '../images/icon/download.svg'
 import { ReactComponent as UploadSvg } from '../images/icon/upload.svg'
 
-const Footer = ({ emptySessions, setNewExerciseMode, newExerciseMode, loadSessions, setSessions }) => {
+const Footer = ({ emptySessions }) => {
+  const dispatch = useDispatch();
 
   // Actions
   const downloadJson = async (fileName, contentType) => {
@@ -22,12 +28,6 @@ const Footer = ({ emptySessions, setNewExerciseMode, newExerciseMode, loadSessio
 
     a.download = `sess-log-exercises-${exercisesArray.length}.json`;
     a.click();
-  }
-
-  const toggleNewExercise = () => {
-    return async() => {
-      await setNewExerciseMode(!newExerciseMode)
-    }
   }
 
   const openUploader = () => {
@@ -58,12 +58,39 @@ const Footer = ({ emptySessions, setNewExerciseMode, newExerciseMode, loadSessio
         // populate w/ new data
         await Promise.all(promises);
         // load to state
-        let newSessions = await loadSessions();
-        await setSessions(newSessions);
       } catch (error) {
         alert('There was an error processing your file. Please check its content.');
       }
   };
+
+  const addNewExercise = async (e) => {
+    const exerciseId = await localForage.length() + 1;
+    let createdAt = new Date();
+
+    // set up new exercise
+    const newExercise = {
+      id: exerciseId,
+      name: '',
+      sets: [
+        // {
+        //   reps: '',
+        //   weight: '',
+        //   created: ''
+        // }
+      ],
+      massType: 'lb',
+      created: createdAt.toJSON(),
+      view: 'edit'
+    }
+
+    dispatch(postExercise(newExercise));
+
+
+    window.scrollTo({ top: 0, behavior: 'auto' });
+
+    // update db, a lot simpler
+    await localForage.setItem(exerciseId.toString(), newExercise);
+  }
 
   // Component & Helpers
   const ArrowPointers = () => (
@@ -98,7 +125,7 @@ const Footer = ({ emptySessions, setNewExerciseMode, newExerciseMode, loadSessio
       { emptySessions ? <ArrowPointers /> : null }
       <DataButton type="upload" onClick={openUploader} />
       <DataButton type="download" onClick={downloadJson} />
-      <QuickAddBtn closeMode={newExerciseMode} onClick={toggleNewExercise()} />
+      <QuickAddBtn onClick={addNewExercise} />
     </div>
   );
 }

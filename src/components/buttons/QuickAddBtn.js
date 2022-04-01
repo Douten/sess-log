@@ -6,16 +6,9 @@ import AddRotate from  '../animations/AddRotate'
 
 const QuickAddBtn = ({ onClick, closeMode }) => {
 
-  const [exitMode, setExitMode] = useState(false);
-
-  const clickAction = () => {
-    setExitMode(!exitMode);
-    onClick();
-  }
-
   return (
     <AddRotate isClose={closeMode}>
-      <button onClick={clickAction}>
+      <button onClick={onClick}>
         <PlusIcon />
       </button>
     </AddRotate>

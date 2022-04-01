@@ -36,6 +36,7 @@ module.exports = {
         'btn': '32px',
         '50': '50px',
         '7/10': '70%',
+        '100': '100px',
         'maxx': '10000%'
       },
       fontSize:{

@@ -1,5 +1,8 @@
 import localForage from 'localforage';
-import { getDate, getDateIndex } from '../utils/date';
+import { useDispatch } from 'react-redux';
+import {
+  postExercise
+} from '../features/exercise/exerciseSlice'
 
 // components
 import NewExercise from './NewExercise'
@@ -8,10 +11,12 @@ import NewExercise from './NewExercise'
 import FadeIn from  './animations/FadeIn'
 
 const Menu = ({ newExerciseMode, sessions, setSessions, setCurrentExercise, currentExercise }) => {
+  const dispatch = useDispatch();
 
   // Actions
   const addExercise = async ({ exercise, reps, weight }) => {
     const exerciseId = await localForage.length() + 1;
+    let createdAt = new Date();
 
     // set up new exercise
     const newExercise = {
@@ -24,30 +29,17 @@ const Menu = ({ newExerciseMode, sessions, setSessions, setCurrentExercise, curr
         }
       ],
       massType: 'lb',
-      created: new Date()
+      created: createdAt.toJSON()
     }
+
     setCurrentExercise(newExercise);
+    dispatch(postExercise(newExercise));
 
-    // get vars for exercise placement in sessions
-    const createdAt = getDate(new Date(newExercise.created));
-    const index = getDateIndex(sessions, createdAt);
 
-    // get updated or new session to add
-    let sessToAdd;
 
-    if (index >= 0) {
-      sessToAdd = [createdAt,[newExercise].concat(sessions[index][1])];
-    } else {
-      sessToAdd = [createdAt, [newExercise]];
-    }
 
     window.scrollTo({ top: 0, behavior: 'auto' });
 
-    // this assumes that exercises are always inserted into the newest session
-    // you can't add exercises to past sessions (for now)
-
-    console.log('sessToAdd', sessToAdd);
-    await setSessions([sessToAdd, ...sessions.slice(1)]);
 
     console.log('added, sessions =>', sessions);
 

@@ -1,10 +1,9 @@
-const Input = ({ setValue, placeholder, type, value, className }) => {
+const Input = ({ onChange, placeholder, type, value, className, indexKey }) => {
 
   const inputStyle = `
         border
         border-gray-3
         h-btn
-        mb-l
         px-m
         rounded-lg
         text-m
@@ -18,7 +17,8 @@ const Input = ({ setValue, placeholder, type, value, className }) => {
       pattern={type === 'number' ? "[0-9]*" : ""}
       placeholder={placeholder || value}
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => onChange(e)}
+      data-index-key={indexKey}
     />
   );
 }
