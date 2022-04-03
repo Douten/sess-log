@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/sess-log/static/css/main.b101eea3.css",
-    "main.js": "/sess-log/static/js/main.48326bd4.js",
+    "main.css": "/sess-log/static/css/main.cb243cdc.css",
+    "main.js": "/sess-log/static/js/main.44323002.js",
     "static/js/787.947a0d94.chunk.js": "/sess-log/static/js/787.947a0d94.chunk.js",
     "static/media/work-sans.ttf": "/sess-log/static/media/work-sans.bb6e3e8193f32a7fc502.ttf",
     "static/media/btn-pointer-arrows.png": "/sess-log/static/media/btn-pointer-arrows.71de729c708afbe222a7.png",
@@ -10,12 +10,12 @@
     "static/media/upload.svg": "/sess-log/static/media/upload.7d7686954e6ce4e2ddd855370dc64d49.svg",
     "static/media/x.svg": "/sess-log/static/media/x.dbf85b52579c65c482281e217b483402.svg",
     "static/media/plus.svg": "/sess-log/static/media/plus.e9afcbe9b77b26bbd102cdef076bf653.svg",
-    "main.b101eea3.css.map": "/sess-log/static/css/main.b101eea3.css.map",
-    "main.48326bd4.js.map": "/sess-log/static/js/main.48326bd4.js.map",
+    "main.cb243cdc.css.map": "/sess-log/static/css/main.cb243cdc.css.map",
+    "main.44323002.js.map": "/sess-log/static/js/main.44323002.js.map",
     "787.947a0d94.chunk.js.map": "/sess-log/static/js/787.947a0d94.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b101eea3.css",
-    "static/js/main.48326bd4.js"
+    "static/css/main.cb243cdc.css",
+    "static/js/main.44323002.js"
   ]
 }
