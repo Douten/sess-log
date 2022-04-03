@@ -38,7 +38,21 @@
   }
 
   .fill-gray-3 path {
-    @apply stroke-gray-3 group-hover:stroke-red
+    @apply stroke-gray-3 group-hover:stroke-red;
+  }
+
+  .form-wrapper.underline-style {
+    input {
+      @apply text-gray-4 border-0 text-m border-b border-gray-4 pl-0 bg-none rounded-none;
+
+      &:focus {
+        @apply px-xxm py-l text-l border-gray-4 border rounded outline-0;
+      }
+
+      &::placeholder {
+        @apply text-gray-4 text-m;
+      }
+    }
   }
 
   .stroke-white path {
@@ -53,4 +67,5 @@
       filter: invert(26%) sepia(89%) saturate(1641%) hue-rotate(358deg) brightness(104%) contrast(91%);
     }
   }
+
 }

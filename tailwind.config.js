@@ -10,6 +10,7 @@ module.exports = {
       'pink': '#F784AD',
       'orange': '#D84910',
       'red': '#F03D3E',
+      'none': 'transparent',
       // 'green': '#13ce66',
       // 'yellow': '#ffc82c',
       'gray-1': '#F8F9FA',
@@ -63,6 +64,12 @@ module.exports = {
       animation: {
         flyin: 'flyin .3s ease-in-out',
         flyout: 'flyout .3s ease-out-in'
+      },
+      flexGrow: {
+        '1': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4
       }
     }
 

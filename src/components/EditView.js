@@ -87,7 +87,7 @@ const EditView = ({ exercise, setView }) => {
   // complete this as separate component & RowView too
   return (
     <div className="w-full flex flex-col">
-      <div className="flex mb-l">
+      <div className="flex mb-l form-wrapper underline-style">
         <Input onChange={onNameChange} placeholder="Exercise Name" value={exercise.name} className="flex-1 box-border mr-m"/>
       </div>
       <div>
@@ -97,9 +97,9 @@ const EditView = ({ exercise, setView }) => {
           weight = String(weight);
           created = getSetTime(new Date(created));
           return (
-            <div key={index} className="flex items-center mb-l">
-              <Input onChange={onRepChange(index)} placeholder="reps" value={reps} className="w-50 mr-m" />
-              <Input onChange={onWeightChange(index)} placeholder="weight" value={weight} className="w-50 flex-1 mr-m" />
+            <div key={index} className="flex form-wrapper underline-style items-center mb-l">
+              <Input onChange={onRepChange(index)} placeholder="reps" value={reps} className="w-50 mr-m flex-grow-1" />
+              <Input onChange={onWeightChange(index)} placeholder="weight" value={weight} className="w-50 flex-grow-2 s mr-m" />
               <div className="mr-l">{created}</div>
               <button onClick={onDeleteSet(index)} className="mr-m w-btn h-btn text-red text-center border border-red rounded opacity-75	">
                 X
